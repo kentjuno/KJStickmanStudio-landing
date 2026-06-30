@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KJ Stickman Studio: Biến ý tưởng thành video doodle stickman</title>
+  <meta name="description" content="App desktop biến kịch bản thành video stickman vẽ tay, có lồng tiếng AI. Làm qua Telegram hoặc giao diện Studio. License theo tháng." />
+  <link rel="icon" href="icon.png" />
+  <meta property="og:title" content="KJ Stickman Studio" />
+  <meta property="og:description" content="Biến ý tưởng thành video doodle stickman có lồng tiếng AI." />
+  <meta property="og:image" content="icon.png" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=1.0.4" />
+</head>
+<body>
+
+  <!-- TOP BAR NAVIGATION -->
+  <nav class="wrap">
+    <div class="nav-in">
+      <a class="brand" href="#top">
+        <img src="icon.png" alt="KJ Stickman Studio Logo" />
+        <span>KJ Stickman Studio</span>
+      </a>
+      <div class="nav-links">
+        <a class="lnk" href="#features" data-nav>Tính năng</a>
+        <a class="lnk" href="#buy" data-nav>Cách mua</a>
+        <a class="lnk" href="#pricing" data-nav>Giá</a>
+        <a class="lnk" href="#download" data-nav>Tải về</a>
+        <a class="lnk" href="#guide" data-nav>Hướng dẫn</a>
+        <a class="lnk" href="#faq" data-nav>FAQ</a>
+        <!-- TODO: thay link Telegram bot bán hàng -->
+        <a class="btn btn-primary" href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Mua license</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header id="top" class="wrap hero">
+    <div class="hero-content reveal">
+      <span class="eyebrow">Doodle Video Studio</span>
+      <h1>Ý tưởng thành video stickman vẽ tay, tự động từ A tới Z.</h1>
+      <p class="sub">Nhập kịch bản, app tự động dựng cảnh doodle, lồng giọng AI và kết xuất video. Làm việc trực tiếp trong Telegram hoặc qua giao diện Studio chuyên nghiệp.</p>
+      <div class="hero-cta">
+        <!-- TODO: thay link Telegram bot bán hàng -->
+        <a class="btn btn-primary" href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Mua license <span class="btn-icon-wrapper">↗</span></a>
+        <a class="btn btn-ghost" href="#download">Tải về dùng thử <span class="btn-icon-wrapper">↓</span></a>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE DESKTOP APP PREVIEW MOCKUP -->
+    <div class="demo-frame reveal delay-1">
+      <div class="window-bar">
+        <span>KJ Stickman Studio - v1.0.4</span>
+        <div class="window-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="mock-ui">
+        <div class="mock-title">STUDIO CẤU HÌNH SẢN XUẤT VIDEO DOODLE</div>
+        
+        <div class="mock-tabs">
+          <span class="mock-tab active" data-tab-target="#tab-script">1. Kịch bản (Stickman)</span>
+          <span class="mock-tab" data-tab-target="#tab-audio">2. Studio Thu âm (Audio)</span>
+          <span class="mock-tab" data-tab-target="#tab-video">3. Studio Dựng hình (Video)</span>
+          <span class="mock-tab" data-tab-target="#tab-post">4. Đóng gói (Post-Prod)</span>
+        </div>
+
+        <!-- TAB 1: SCRIPT -->
+        <div class="mock-content active" id="tab-script">
+          <div class="mock-row">
+            <span>Chủ đề video:</span>
+            <span class="mock-input">Chiến dịch Điện Biên Phủ trên không lừng lẫy năm 1972...</span>
+            <span class="mock-btn">Sinh kịch bản</span>
+          </div>
+          <div class="mock-row">
+            <span>AI Model:</span>
+            <span class="mock-input">Claude 3.5 Sonnet / Antigravity CLI (Fallback)</span>
+            <span></span>
+          </div>
+          <div class="mock-script">
+            [Phân cảnh 1] Vẽ cảnh bầu trời đêm Hà Nội ngập tràn tia laser và pháo cao xạ sáng rực...<br/>
+            [Lời thoại 1] Tháng 12 năm 1972, bầu trời Hà Nội rực lửa trong cuộc đụng độ lịch sử...
+          </div>
+        </div>
+
+        <!-- TAB 2: AUDIO -->
+        <div class="mock-content" id="tab-audio">
+          <div class="mock-row">
+            <span>Giọng đọc AI:</span>
+            <span class="mock-input">Nam Miền Bắc (Narrator V2)</span>
+            <span class="mock-btn">Nghe thử</span>
+          </div>
+          <div class="mock-row">
+            <span>Engine voice:</span>
+            <span class="mock-input">OmniVoice (NVIDIA GPU - CUDA 12.8)</span>
+            <span></span>
+          </div>
+          <div class="mock-grid">
+            <div class="mock-box">
+              <strong>Tốc độ đọc</strong>
+              <span>1.0x (Tự động khớp phụ đề)</span>
+            </div>
+            <div class="mock-box">
+              <strong>Khoảng nghỉ (Gap)</strong>
+              <span>0.2s giữa các câu thoại</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: VIDEO STORYBOARD -->
+        <div class="mock-content" id="tab-video">
+          <div class="mock-row">
+            <span>Flow Generator:</span>
+            <span class="mock-input">Google Flow (labs.google) via Extension</span>
+            <span class="mock-btn">Auto-Render</span>
+          </div>
+          <div class="mock-preview-strip">
+            <div class="mock-img-box active">
+              <span>Scene #1</span>
+              <span class="lbl">✓ Rendered</span>
+            </div>
+            <div class="mock-img-box active">
+              <span>Scene #2</span>
+              <span class="lbl">✓ Rendered</span>
+            </div>
+            <div class="mock-img-box">
+              <span>Scene #3</span>
+              <span class="lbl">Rendering...</span>
+            </div>
+            <div class="mock-img-box">
+              <span>Scene #4</span>
+              <span class="lbl">Pending</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: POST-PRODUCTION -->
+        <div class="mock-content" id="tab-post">
+          <div class="mock-row">
+            <span>Hiệu ứng xuất:</span>
+            <span class="mock-input">Ken Burns Zoom + Fade transition (FFmpeg)</span>
+            <span class="mock-btn">Kết xuất MP4</span>
+          </div>
+          <div class="mock-console">
+            <div class="ln">[System] Starting video compilation engine...</div>
+            <div class="ln">[FFmpeg] Processing frame 148/520 (28%) - 24fps</div>
+            <div class="ln warn">[FlowKit] Checking audio alignment... Match!</div>
+            <div class="ln">[System] Audio ducking completed. Background music at 12%.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- REQUIREMENTS SUMMARY ALERT -->
+    <div class="req-alert reveal delay-2">
+      <div class="req-icon">⚠️</div>
+      <div class="req-content">
+        <b>Điều kiện cấu hình bắt buộc:</b> Do phần mềm thực hiện vẽ hình ảnh và chuyển động qua <b>Google Flow</b>, bạn bắt buộc phải có <b>tài khoản Google Flow riêng + trình duyệt Chrome</b> cài đặt trên máy. Chạy tốt trên hệ điều hành Windows, không yêu cầu card đồ họa mạnh để dựng hình.
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURES BENTO SECTION -->
+  <section id="features" class="wrap">
+    <div class="section-head reveal">
+      <h2>Tính năng toàn diện của Studio</h2>
+      <p>Giải pháp khép kín biến mọi ý tưởng thô thành video hoàn chỉnh: viết kịch bản, lồng tiếng, tạo hình và đóng gói.</p>
+    </div>
+    <div class="bento-grid">
+      <div class="card-shell span2 reveal">
+        <div class="card">
+          <span class="ic">✍️</span>
+          <h3>AI Soạn kịch bản & Giữ mạch Series</h3>
+          <p>Chỉ cần cung cấp ý tưởng chính, AI sẽ tự động lập dàn ý kịch bản khớp với phong cách kênh của bạn. Hệ thống sử dụng Series Bible để đảm bảo mạch truyện và các nhân vật đồng nhất qua hàng loạt tập phim.</p>
+        </div>
+      </div>
+      <div class="card-shell reveal">
+        <div class="card">
+          <span class="ic">🎙️</span>
+          <h3>Lồng tiếng AI biểu cảm</h3>
+          <p>Tích hợp nhiều thư viện giọng đọc tiếng Việt tự nhiên. App tự động tính toán độ dài câu thoại để phân phối khoảng lặng và ghép khớp theo thời gian thực.</p>
+        </div>
+      </div>
+      <div class="card-shell reveal">
+        <div class="card">
+          <span class="ic">🎨</span>
+          <h3>Sinh ảnh & Video vẽ tay tự động</h3>
+          <p>Tự động tạo ra các bức ảnh vẽ tay doodle ngộ nghĩnh bám sát kịch bản thông qua Google Flow, tạo nên phong cách video độc đáo thu hút người xem.</p>
+        </div>
+      </div>
+      <div class="card-shell reveal">
+        <div class="card">
+          <span class="ic">📺</span>
+          <h3>Quản lý & Tải lên YouTube</h3>
+          <p>Hỗ trợ thiết lập preset riêng cho từng kênh YouTube. Cho phép đẩy video kèm mô tả, tiêu đề và thẻ tag trực tiếp từ ứng dụng mà không cần qua trình duyệt.</p>
+        </div>
+      </div>
+      <div class="card-shell reveal">
+        <div class="card">
+          <span class="ic">🤖</span>
+          <h3>Điều khiển qua Bot Telegram</h3>
+          <p>Bạn hoàn toàn có thể sản xuất video từ xa: chỉ cần gửi ý tưởng cho Telegram bot và nhận lại video thành phẩm. Hoặc mở app Studio trên PC để tinh chỉnh thủ công từng layer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO BUY STEPS -->
+  <section id="buy" style="background: var(--panel);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Quy trình mua license 3 bước</h2>
+        <p>Giao dịch tự động, thuận tiện và an toàn thông qua Telegram Bot. Kích hoạt và sử dụng ngay lập tức.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-num">1</div>
+          <h3>Nhắn bot bán hàng</h3>
+          <p>Mở ứng dụng Telegram, kết nối với bot bán hàng và chọn gói thời hạn license bạn mong muốn đăng ký.</p>
+        </div>
+        <div class="step-card reveal delay-1">
+          <div class="step-num">2</div>
+          <h3>Quét mã QR thanh toán</h3>
+          <p>Bot sẽ trả về một mã QR ngân hàng động kèm nội dung chuyển khoản. Thực hiện giao dịch và đợi hệ thống xác nhận tự động trong giây lát.</p>
+        </div>
+        <div class="step-card reveal delay-2">
+          <div class="step-num">3</div>
+          <h3>Nhận Key Kích hoạt</h3>
+          <p>Sau khi xác thực giao dịch, Bot sẽ gửi cho bạn một mã khóa kích hoạt dạng SK-. Sao chép mã và dán vào ứng dụng để mở khóa full tính năng.</p>
+        </div>
+      </div>
+      <div style="margin-top: 36px;" class="reveal">
+        <!-- TODO: thay link Telegram bot bán hàng -->
+        <a class="btn btn-primary" href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Mở bot Telegram ngay <span class="btn-icon-wrapper">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing" class="wrap">
+    <div class="section-head reveal" style="justify-content: center; text-align: center; border-bottom: none; padding-bottom: 0;">
+      <div>
+        <h2>Biểu giá đơn giản, minh bạch</h2>
+        <p style="margin: 12px auto 0;">License theo chu kỳ tháng. Một mã key kích hoạt chạy cố định trên một máy tính tại một thời điểm (hỗ trợ reset chuyển máy).</p>
+      </div>
+    </div>
+    <div class="price-container reveal delay-1">
+      <!-- Trial 1 week -->
+      <div class="price-card-shell">
+        <div class="price-card">
+          <span class="price-term">Dùng thử 1 tuần</span>
+          <div class="price">200K</div>
+          <ul>
+            <li>Trải nghiệm đầy đủ tính năng trong 7 ngày.</li>
+            <li>Studio desktop + Telegram bot.</li>
+            <li>Xuất video không watermark.</li>
+            <li>1 key / 1 máy (reset đổi máy qua hỗ trợ).</li>
+          </ul>
+          <!-- TODO: thay link Telegram bot bán hàng -->
+          <a class="btn btn-ghost" href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Mua dùng thử</a>
+        </div>
+      </div>
+      <!-- 1 month (recommended) -->
+      <div class="price-card-shell price-featured">
+        <div class="price-card">
+          <span class="price-badge">Phổ biến nhất</span>
+          <span class="price-term">1 tháng</span>
+          <div class="price">499K</div>
+          <ul>
+            <li>Toàn bộ tính năng: kịch bản, ảnh, lồng tiếng, xuất bản.</li>
+            <li>Studio desktop + Telegram bot + upload đa kênh YouTube.</li>
+            <li>Tự động cập nhật bản mới.</li>
+            <li>1 key / 1 máy (reset đổi máy qua hỗ trợ).</li>
+          </ul>
+          <!-- TODO: thay link Telegram bot bán hàng -->
+          <a class="btn btn-primary" href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Mua license ngay</a>
+        </div>
+      </div>
+      <!-- 1 year (best value) -->
+      <div class="price-card-shell">
+        <div class="price-card">
+          <span class="price-term">1 năm · tiết kiệm nhất</span>
+          <div class="price">2.999K</div>
+          <ul>
+            <li>Tất cả quyền lợi của gói tháng, trọn 12 tháng.</li>
+            <li>Rẻ hơn ~50% so với mua tháng lẻ.</li>
+            <li>Ưu tiên hỗ trợ + nhận tính năng mới sớm.</li>
+            <li>1 key / 1 máy (reset đổi máy qua hỗ trợ).</li>
+          </ul>
+          <!-- TODO: thay link Telegram bot bán hàng -->
+          <a class="btn btn-ghost" href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Mua gói năm</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="onboarding-banner reveal delay-2">
+      <div>
+        <strong style="color: var(--ink); font-family: var(--display);">🎓 Gói cài đặt + hướng dẫn 1-1 + training</strong>
+        <p style="margin: 6px 0 0; color: var(--muted); font-size: 14px;">Tùy chọn (một lần): hỗ trợ cài đặt tận máy, kết nối Google Flow, và buổi training 1-1 để dùng thành thạo.</p>
+      </div>
+      <span class="ob-price">1.000.000đ</span>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD & ACTIVATION SECTION -->
+  <section id="download" style="background: var(--panel);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Tải về & Kích hoạt bản cài</h2>
+        <p>Ứng dụng chạy trên hệ điều hành Windows. Tải về giải nén và kích hoạt để bắt đầu tạo clip stickman.</p>
+      </div>
+      <div class="dl-grid">
+        <div class="dl-card-shell reveal">
+          <div class="dl-card">
+            <h3>⬇️ Tải bộ cài ứng dụng</h3>
+            <p>Tải xuống bản dựng ổn định mới nhất dành cho Windows. Ứng dụng tích hợp sẵn cơ chế kiểm tra và tự động cập nhật khi có bản vá lỗi mới phát hành.</p>
+            <!-- TODO: thay link GitHub Releases -->
+            <a class="btn btn-primary" href="https://github.com/kentjuno/KJStickmanStudio-landing/releases/latest" target="_blank" rel="noopener">Tải bản mới nhất (Win) <span class="btn-icon-wrapper">↓</span></a>
+          </div>
+        </div>
+        <div class="dl-card-shell reveal delay-1">
+          <div class="dl-card">
+            <h3>🔑 Hướng dẫn kích hoạt</h3>
+            <p>Mở ứng dụng sau khi giải nén, copy mã key kích hoạt định dạng <code>SK-XXXX-XXXX-XXXX</code> nhận được từ Bot bán hàng và nhấn kích hoạt. Ứng dụng cho phép hoạt động offline định kỳ.</p>
+            <div class="code-copy-block">
+              <code>SK-DEMO-STCK-1090-STUDIO</code>
+              <button class="copy-btn" data-copy="SK-DEMO-STCK-1090-STUDIO">Copy</button>
+            </div>
+            <p style="margin: 8px 0 0; font-size: 13.5px;">Chưa có mã key kích hoạt? <a href="#buy" style="color: var(--amber-2); font-weight: 700;">Xem hướng dẫn mua hàng</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALL & USAGE GUIDE SECTION -->
+  <section id="guide" class="wrap">
+    <div class="section-head reveal">
+      <h2>Hướng dẫn cài đặt &amp; sử dụng</h2>
+      <p>Từ lúc tải về tới khi xuất video đầu tiên. Lần đầu mất vài phút để cài bộ chạy, sau đó vào thẳng.</p>
+    </div>
+
+    <div class="guide-block reveal">
+      <h3>① Cài đặt</h3>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span class="gn">1</span>
+          <div>
+            <h4>Tải &amp; chạy bộ cài</h4>
+            <p>Tải file cài Windows ở mục <a href="#download" style="color:var(--amber-2)">Tải về</a>, chạy file <code>.exe</code> và làm theo trình cài đặt.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="gn">2</span>
+          <div>
+            <h4>Lần đầu mở: đợi cài bộ chạy</h4>
+            <p>Lần chạy đầu, app tự tải Python + thư viện cần thiết (một cửa sổ console hiện tiến trình, vài phút tùy mạng). Xong là xong vĩnh viễn, lần sau mở vào thẳng.</p>
+          </div>
+        </div>
+        <div class="guide-step critical">
+          <span class="gn">3</span>
+          <div>
+            <h4>⚠️ Kết nối Google Flow (bắt buộc)</h4>
+            <p>Cài <b>Chrome</b>, đăng nhập <b>tài khoản Google Flow</b> riêng của bạn và bật <b>extension FlowKit</b> để app tạo được ảnh/video. Không có bước này thì không render hình được.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="gn">4</span>
+          <div>
+            <h4>Nhập key kích hoạt</h4>
+            <p>Dán mã <code>SK-XXXX-XXXX-XXXX</code> (nhận từ bot bán hàng) vào màn hình kích hoạt. Kích hoạt 1 lần, dùng offline trong hạn license.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-block reveal delay-1">
+      <h3>② Sử dụng</h3>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span class="gn">A</span>
+          <div>
+            <h4>Cách nhanh: qua Telegram bot</h4>
+            <p>Vào Settings → dán <b>token bot Telegram của bạn</b> → bật bot. Nhắn ý tưởng/chủ đề cho bot, bot tự viết kịch bản, vẽ, lồng tiếng và trả về video.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="gn">B</span>
+          <div>
+            <h4>Cách chủ động: giao diện Studio</h4>
+            <p>Nhập chủ đề → AI viết kịch bản → tạo ảnh + lồng tiếng → ghép timeline → xuất MP4. Chỉnh tay từng cảnh/câu/track nếu muốn, rồi (tuỳ chọn) upload thẳng lên YouTube đa kênh.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <span class="gn">C</span>
+          <div>
+            <h4>Chạy nền</h4>
+            <p>Bấm đóng cửa sổ để thu nhỏ app xuống khay hệ thống (system tray), bot vẫn chạy nhận lệnh. Chuột phải icon tray để Mở cửa sổ hoặc Thoát.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 22px; color: var(--muted); font-size: 14px;">
+        Cần hỗ trợ tận tay? Có gói <a href="#pricing" style="color:var(--amber-2)">cài đặt + training 1-1</a> (1.000.000đ).
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="wrap">
+    <div class="section-head reveal">
+      <h2>Câu hỏi thường gặp</h2>
+    </div>
+    <div class="faq-list reveal delay-1">
+      <details>
+        <summary>Tôi có cần tài khoản Google Flow không?</summary>
+        <p>Có. Ứng dụng sử dụng API sinh ảnh từ Google Flow thông qua extension Chrome. Bạn cần đăng nhập tài khoản Google Flow sẵn trên trình duyệt Chrome để ứng dụng liên kết và tự động tạo hình.</p>
+      </details>
+      <details>
+        <summary>Một mã key kích hoạt dùng được cho mấy máy?</summary>
+        <p>Mỗi key chỉ kích hoạt và hoạt động trên một máy tính tại một thời điểm. Nếu bạn đổi thiết bị làm việc, vui lòng liên hệ bộ phận hỗ trợ kỹ thuật trên Telegram để được reset key kích hoạt.</p>
+      </details>
+      <details>
+        <summary>Ứng dụng có thể làm việc không cần mạng internet không?</summary>
+        <p>Sau khi kích hoạt online thành công, app có thể hoạt động offline hoàn toàn trong vòng 7 ngày trước khi cần kết nối internet lại để tự động gia hạn phiên làm việc.</p>
+      </details>
+      <details>
+        <summary>Cấu hình máy tính yếu có chạy được phần mềm không?</summary>
+        <p>Được. Tiến trình xử lý đồ họa sinh ảnh chạy qua Cloud Google Flow nên máy tính của bạn không yêu cầu cấu hình GPU mạnh mẽ. Bạn chỉ cần máy tính cài Windows và có sẵn Chrome.</p>
+      </details>
+      <details>
+        <summary>Tôi có thể làm video hoàn toàn từ xa qua Telegram không?</summary>
+        <p>Được. Bạn có thể gửi ý tưởng trực tiếp cho bot Telegram để sinh video hoàn chỉnh tự động. Giao diện app Studio trên PC chỉ cần thiết khi bạn muốn can thiệp sâu, cắt ghép thủ công.</p>
+      </details>
+      <details>
+        <summary>Chính sách đổi trả & hoàn tiền như thế nào?</summary>
+        <p>Hệ thống không áp dụng chính sách hoàn trả phí sau khi key kích hoạt đã được gửi và kích hoạt thành công trên máy. Vui lòng tham khảo kỹ thông số kỹ thuật trước khi mua hàng.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="wrap">
+    <div>© <span data-year></span> KJ Stickman Studio. All rights reserved.</div>
+    <!-- TODO: thay link Telegram bot bán hàng -->
+    <div><a href="https://t.me/YOUR_SALES_BOT" target="_blank" rel="noopener">Liên hệ Hỗ trợ qua Telegram</a></div>
+  </footer>
+
+  <script src="main.js?v=1.0.4"></script>
+</body>
+</html>
