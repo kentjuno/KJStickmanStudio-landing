@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KJ Stickman Studio — Sản xuất video stickman doodle tự động</title>
-  <meta name="description" content="App desktop Windows biến kịch bản thành video stickman vẽ tay, lồng tiếng AI, sinh hình qua Google Flow — tự động từ A tới Z. Chạy bằng CPU, không cần GPU. License theo tháng." />
+  <meta name="description" content="App desktop Windows biến kịch bản thành video stickman vẽ tay, lồng tiếng AI, sinh hình qua Google Flow — tự động từ A tới Z. Chạy trên Windows (cần GPU NVIDIA). License theo tháng." />
   <link rel="canonical" href="https://stickman.kentjuno.com/" />
   <link rel="icon" href="icon.png" />
 
@@ -15,7 +15,7 @@
   <meta property="og:locale" content="vi_VN" />
   <meta property="og:site_name" content="KJ Stickman Studio" />
   <meta property="og:title" content="KJ Stickman Studio — Sản xuất video stickman doodle tự động" />
-  <meta property="og:description" content="Từ ý tưởng tới video doodle hoàn chỉnh, tự động từ A tới Z. Lồng tiếng AI, sinh hình qua Google Flow, chạy bằng CPU trên Windows." />
+  <meta property="og:description" content="Từ ý tưởng tới video doodle hoàn chỉnh, tự động từ A tới Z. Lồng tiếng AI, sinh hình qua Google Flow, chạy trên Windows (cần GPU NVIDIA)." />
   <meta property="og:image" content="https://stickman.kentjuno.com/og-cover.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -23,7 +23,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="KJ Stickman Studio — Sản xuất video stickman doodle tự động" />
-  <meta name="twitter:description" content="Từ ý tưởng tới video doodle hoàn chỉnh, tự động từ A tới Z. Chạy bằng CPU trên Windows." />
+  <meta name="twitter:description" content="Từ ý tưởng tới video doodle hoàn chỉnh, tự động từ A tới Z. Chạy trên Windows (cần GPU NVIDIA)." />
   <meta name="twitter:image" content="https://stickman.kentjuno.com/og-cover.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -137,7 +137,7 @@
           </div>
           <div class="mock-row">
             <span>Engine voice:</span>
-            <span class="mock-input">OmniVoice (CPU · không cần GPU)</span>
+            <span class="mock-input">OmniVoice (GPU NVIDIA · CUDA)</span>
             <span></span>
           </div>
           <div class="mock-grid">
@@ -203,16 +203,16 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Yêu cầu hệ thống — kiểm tra trước khi mua</h2>
-        <p>Đọc kỹ để chắc máy bạn chạy được. App tối ưu cho Windows và xử lý bằng CPU.</p>
+        <p>Đọc kỹ để chắc máy bạn chạy được. App chạy trên Windows và cần GPU NVIDIA cho engine lồng tiếng AI.</p>
       </div>
       <div class="req-grid">
         <div class="req-col reveal">
           <h3>Phần cứng &amp; HĐH</h3>
           <ul class="check-list">
             <li>Windows 10 / 11 (64-bit) — bắt buộc; chưa hỗ trợ macOS / Linux</li>
-            <li>RAM tối thiểu 8 GB</li>
-            <li>Ổ cứng trống ≥ 5 GB (app + Python runtime + model giọng đọc ~1.2 GB)</li>
-            <li><b>Không cần card đồ họa (GPU)</b> — xử lý bằng CPU</li>
+            <li>RAM <b>32 GB</b> (khuyến nghị — để lồng tiếng AI mượt)</li>
+            <li>Ổ cứng trống ≥ 10 GB (app + Python runtime + PyTorch CUDA + model giọng đọc ~1.2 GB)</li>
+            <li><b>Card đồ họa NVIDIA, VRAM ≥ 8 GB</b> — cần cho engine giọng OmniVoice (chạy bằng CPU sẽ rất chậm)</li>
           </ul>
         </div>
         <div class="req-col reveal delay-1">
@@ -230,7 +230,7 @@
         <div class="req-icon">⚠️</div>
         <div class="req-content">
           <b>Lần chạy đầu tiên:</b>
-          <p>App tự tải Python + thư viện + model OmniVoice (~3–5 GB tổng), <b>một lần duy nhất</b>, mất 10–30 phút tùy mạng. Giữ internet ổn định.</p>
+          <p>App tự tải Python + thư viện + model OmniVoice (~5–8 GB tổng), <b>một lần duy nhất</b>, mất 10–30 phút tùy mạng. Giữ internet ổn định.</p>
         </div>
       </div>
     </div>
@@ -460,7 +460,7 @@
           <div class="dl-card">
             <h3>⬇️ Tải bộ cài ứng dụng</h3>
             <p>Tải xuống bản dựng ổn định mới nhất dành cho Windows. Ứng dụng tích hợp sẵn cơ chế kiểm tra và tự động cập nhật khi có bản vá lỗi mới phát hành.</p>
-            <p class="dl-note">Lưu ý: lần chạy đầu app tự tải thêm runtime + model <b>~3–5 GB</b> (một lần duy nhất, 10–30 phút tùy mạng).</p>
+            <p class="dl-note">Lưu ý: lần chạy đầu app tự tải thêm runtime + model <b>~5–8 GB</b> (một lần duy nhất, 10–30 phút tùy mạng).</p>
             <a class="btn btn-primary" href="https://github.com/kentjuno/KJStickmanStudio-landing/releases/latest" target="_blank" rel="noopener">Tải bản mới nhất (Win) <span class="btn-icon-wrapper">↓</span></a>
           </div>
         </div>
@@ -500,7 +500,7 @@
           <span class="gn doodle-hand">2</span>
           <div>
             <h4>Lần đầu mở: đợi tải runtime (~10–30 phút)</h4>
-            <p>App tự tải Python + thư viện + model (~3–5 GB), một cửa sổ console hiện tiến trình, đừng đóng. Lần sau vào thẳng.</p>
+            <p>App tự tải Python + thư viện + model (~5–8 GB), một cửa sổ console hiện tiến trình, đừng đóng. Lần sau vào thẳng.</p>
           </div>
         </div>
         <div class="guide-step">
@@ -572,7 +572,7 @@
       </details>
       <details>
         <summary>Lần đầu mở app mất bao lâu?</summary>
-        <p>~10–30 phút tùy mạng — app tải runtime + model (~3–5 GB) một lần duy nhất. Sau đó mở vào thẳng.</p>
+        <p>~10–30 phút tùy mạng — app tải runtime + model (~5–8 GB) một lần duy nhất. Sau đó mở vào thẳng.</p>
       </details>
       <details>
         <summary>Tải lần đầu bị lỗi giữa chừng?</summary>
@@ -588,7 +588,7 @@
       </details>
       <details>
         <summary>Cấu hình máy tính yếu có chạy được phần mềm không?</summary>
-        <p>Được. Tiến trình sinh ảnh chạy qua Google Flow nên máy tính của bạn không cần GPU. Bạn chỉ cần Windows và Chrome; phần xử lý còn lại dùng CPU.</p>
+        <p>Sinh ảnh/video chạy qua Google Flow (trên cloud) nên không tốn GPU máy bạn. NHƯNG lồng tiếng AI (OmniVoice) chạy ngay trên máy nên cần GPU NVIDIA (VRAM ≥ 8 GB) + RAM 32 GB để mượt — chạy bằng CPU sẽ rất chậm.</p>
       </details>
       <details>
         <summary>Chính sách đổi trả &amp; hoàn tiền như thế nào?</summary>
