@@ -1,23 +1,14 @@
-# KJ Stickman Studio — Landing
+# KJ Stickman Studio
 
-Static landing page (1 file, không cần build) để mở bán. Self-contained `index.html`
-+ `icon.png`/`logo.png`. Dark theme + accent amber, copy tiếng Việt.
+Biến ý tưởng thành **video stickman vẽ tay**, tự động từ A tới Z — kịch bản → lồng tiếng AI → hình doodle → video hoàn chỉnh. App desktop cho Windows.
 
-## Xem thử
-Mở `index.html` bằng trình duyệt (chạy offline, trừ Google Fonts cần mạng).
+- 🌐 **Trang chủ:** https://stickman.kentjuno.com
+- ⬇️ **Tải về:** https://github.com/kentjuno/KJStickmanStudio-landing/releases/latest
+- 💬 **Mua license (Telegram):** https://t.me/stickmanstudiobot
+- 👥 **Cộng đồng (Facebook):** https://www.facebook.com/groups/1759571291694090
 
-## Deploy lên GitHub Pages (cũng là repo serve Releases cho auto-update)
-1. Tạo repo `KJStickmanStudio-landing`, đẩy thư mục này lên (hoặc copy `index.html` + ảnh).
-2. Settings → Pages → Source: `main` / root → Save. Vài phút sau có URL `https://kentjuno.github.io/KJStickmanStudio-landing/`.
-3. (Tuỳ chọn) gắn custom domain.
-4. **GitHub Releases của chính repo này = link tải app + feed auto-update (P4)**. Upload bản cài `.exe` vào Releases.
+**Yêu cầu:** Windows 10/11 (64-bit) · RAM 32 GB · GPU NVIDIA (VRAM ≥ 8 GB). Lần đầu mở app tự tải runtime + model (~5–8 GB, một lần duy nhất).
 
-## TODO của owner (media, chưa làm được ở đây)
-- **og-cover.png** 1200×630 — thêm vào `landing/` (thẻ og:image đã trỏ sẵn).
-- **Video demo** (hero — placeholder "🎬 Video demo — sắp có"; quay xong nhúng YouTube embed hoặc `<video>`).
-- **voices/sample.wav** — file nghe thử giọng đọc (thẻ `<audio>` đã trỏ sẵn).
+---
 
-Đã wire sẵn: bot `https://t.me/stickmanstudiobot`, nhóm FB `1759571291694090`, CNAME `stickman.kentjuno.com`.
-
-## Anti-slop đã tuân
-1 accent (amber) toàn trang, dark theme khoá, 0 em-dash, hero gọn trong viewport, bento có nhịp (không 3 card đều), motion nhẹ + tôn trọng `prefers-reduced-motion`, callout yêu cầu Flow/Chrome nổi bật để tránh refund.
+Phát triển bởi **Kent Juno**. © KJ Stickman Studio.
