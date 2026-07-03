@@ -12,12 +12,12 @@ Mở `index.html` bằng trình duyệt (chạy offline, trừ Google Fonts cầ
 3. (Tuỳ chọn) gắn custom domain.
 4. **GitHub Releases của chính repo này = link tải app + feed auto-update (P4)**. Upload bản cài `.exe` vào Releases.
 
-## TODO trước khi mở bán (9 chỗ — search "TODO" trong index.html)
-- **Link Telegram bot bán hàng** (`https://t.me/YOUR_SALES_BOT`) — 5 chỗ (nav, hero, buy, pricing, footer).
-- **Giá thật** (đang để `499K / tháng` mẫu).
-- **Video demo** (hero — nhúng YouTube embed hoặc thẻ `<video>`).
-- **Link GitHub Releases** (nút Tải — đổi `kentjuno/KJStickmanStudio-landing`).
-- **Chính sách hoàn tiền** (FAQ).
+## TODO của owner (media, chưa làm được ở đây)
+- **og-cover.png** 1200×630 — thêm vào `landing/` (thẻ og:image đã trỏ sẵn).
+- **Video demo** (hero — placeholder "🎬 Video demo — sắp có"; quay xong nhúng YouTube embed hoặc `<video>`).
+- **voices/sample.wav** — file nghe thử giọng đọc (thẻ `<audio>` đã trỏ sẵn).
+
+Đã wire sẵn: bot `https://t.me/stickmanstudiobot`, nhóm FB `1759571291694090`, CNAME `stickman.kentjuno.com`.
 
 ## Anti-slop đã tuân
 1 accent (amber) toàn trang, dark theme khoá, 0 em-dash, hero gọn trong viewport, bento có nhịp (không 3 card đều), motion nhẹ + tôn trọng `prefers-reduced-motion`, callout yêu cầu Flow/Chrome nổi bật để tránh refund.

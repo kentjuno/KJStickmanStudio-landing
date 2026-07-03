@@ -74,3 +74,54 @@ const revealObserver = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+// Mobile nav hamburger toggle
+const navToggle = document.getElementById("navToggle");
+if (navToggle) {
+  const setOpen = (open) => {
+    document.body.classList.toggle("nav-open", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+  };
+  navToggle.addEventListener("click", () =>
+    setOpen(!document.body.classList.contains("nav-open"))
+  );
+  // close drawer after tapping a link
+  document.querySelectorAll("#navLinks a").forEach((a) =>
+    a.addEventListener("click", () => setOpen(false))
+  );
+  // close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+}
+
+// Sticky buy bar: show after scrolling past hero (~400px); dismissible; hide when footer visible
+const buyBar = document.getElementById("buyBar");
+if (buyBar) {
+  let dismissed = false;
+  let footerVisible = false;
+  const footer = document.querySelector("footer");
+
+  const update = () => {
+    if (dismissed) return;
+    const show = window.scrollY > 400 && !footerVisible;
+    buyBar.hidden = false;
+    buyBar.classList.toggle("show", show);
+  };
+
+  window.addEventListener("scroll", update, { passive: true });
+
+  if (footer) {
+    new IntersectionObserver((entries) => {
+      footerVisible = entries[0].isIntersecting;
+      update();
+    }).observe(footer);
+  }
+
+  document.getElementById("buyBarClose").addEventListener("click", () => {
+    dismissed = true;
+    buyBar.classList.remove("show");
+  });
+
+  update();
+}
