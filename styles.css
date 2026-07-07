@@ -1384,6 +1384,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
 
 /* Pricing sub-price + refund note */
 .price-sub { color: var(--muted); font-size: 14px; margin: -4px 0 4px; }
+.price-was { color: var(--muted); font-size: 15px; text-decoration: line-through; opacity: .7; margin-bottom: 2px; }
 .refund-note {
   margin-top: 22px;
   max-width: 760px;
