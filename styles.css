@@ -841,13 +841,16 @@ h2.center::after { left: 10%; right: 10%; }
 /* 9. PRICING SECTION */
 .price-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   align-items: stretch;
   margin-top: 24px;
 }
-@media (max-width: 900px) {
-  .price-container { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+@media (max-width: 1100px) {
+  .price-container { grid-template-columns: repeat(2, 1fr); max-width: 720px; margin-left: auto; margin-right: auto; }
+}
+@media (max-width: 560px) {
+  .price-container { grid-template-columns: 1fr; max-width: 440px; }
 }
 .price-featured { border-color: rgba(245, 158, 11, 0.6); box-shadow: var(--shadow), 0 0 40px rgba(245, 158, 11, 0.3); }
 .price-term { color: var(--muted); font-family: var(--display); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
