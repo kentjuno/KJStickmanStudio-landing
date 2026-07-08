@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Công cụ phân tích kênh đối thủ YouTube — KJ Stickman Studio</title>
+<meta name="description" content="Công cụ miễn phí: nhập link kênh hoặc thể loại, nhận danh sách kênh đối thủ, phân tích lịch đăng và lộ trình 4 tuần. Chạy hoàn toàn trên trình duyệt bằng API key của bạn." />
+<style>
+  :root{
+    --bg:#0f1115; --card:#1a1d24; --card2:#22262f; --border:#2e333d;
+    --text:#e8eaed; --muted:#9aa0a8; --accent:#ff4444; --accent2:#3ea6ff;
+    --green:#2ecc71; --yellow:#f1c40f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+  h1{font-size:1.5rem;margin-bottom:4px}
+  h1 span{color:var(--accent)}
+  .sub{color:var(--muted);margin-bottom:20px;font-size:.95rem}
+  .backlink{display:inline-block;margin-bottom:14px;color:var(--accent2);font-size:.9rem}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:16px}
+  label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px}
+  input[type=text],input[type=password],select{
+    width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);
+    background:var(--card2);color:var(--text);font-size:.95rem;outline:none
+  }
+  input:focus{border-color:var(--accent2)}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .row>div{flex:1;min-width:220px}
+  button{
+    background:var(--accent);color:#fff;border:none;border-radius:8px;
+    padding:11px 22px;font-size:.95rem;font-weight:600;cursor:pointer;margin-top:12px
+  }
+  button:hover{opacity:.9}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  button.ghost{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 14px;font-weight:400}
+  .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+  .hint a{color:var(--accent2)}
+  #status{margin:14px 0;color:var(--accent2);font-size:.9rem;min-height:20px}
+  #status.err{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.4px}
+  tr:hover td{background:var(--card2)}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .badge{display:inline-block;background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:2px 10px;font-size:.75rem;color:var(--muted);margin:2px 3px 2px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+  .stat{background:var(--card2);border-radius:10px;padding:12px;text-align:center}
+  .stat .v{font-size:1.3rem;font-weight:700;color:var(--accent2)}
+  .stat .l{font-size:.75rem;color:var(--muted)}
+  h2{font-size:1.1rem;margin:26px 0 10px;padding-left:10px;border-left:3px solid var(--accent)}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;font-size:.78rem}
+  .cal .dh{text-align:center;color:var(--muted);padding:4px 0}
+  .cal .day{background:var(--card2);border:1px solid var(--border);border-radius:8px;min-height:64px;padding:5px}
+  .cal .day.post{border-color:var(--accent);background:#2a1a1c}
+  .cal .day .n{color:var(--muted);font-size:.7rem}
+  .cal .day .idea{color:var(--text);margin-top:3px;font-size:.72rem}
+  .insight{background:var(--card2);border-left:3px solid var(--green);border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:.9rem}
+  .warn{border-left-color:var(--yellow)}
+  details{margin-top:10px}
+  summary{cursor:pointer;color:var(--accent2);font-size:.9rem}
+  ol{margin:10px 0 0 22px;font-size:.9rem;color:var(--muted)}
+  ol li{margin-bottom:6px}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  #results{display:none}
+  .topvid{font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="/">← Về KJ Stickman Studio</a>
+  <h1>▶ Phân tích <span>kênh đối thủ</span> YouTube</h1>
+  <p class="sub">Nhập link kênh hoặc thể loại nội dung — nhận danh sách kênh tương tự, phân tích đối thủ và lộ trình đăng bài đề xuất. Công cụ miễn phí, chạy hoàn toàn trên trình duyệt của bạn bằng API key của bạn — chúng tôi không thu thập bất cứ dữ liệu nào.</p>
+
+  <div class="card">
+    <label>YouTube Data API Key</label>
+    <input type="password" id="apiKey" placeholder="Dán API key của bạn vào đây (được lưu trên máy bạn)">
+    <details>
+      <summary>Chưa có API key? Xem hướng dẫn tạo miễn phí (~3 phút)</summary>
+      <ol>
+        <li>Mở <a href="https://console.cloud.google.com/" target="_blank">console.cloud.google.com</a> và đăng nhập Google.</li>
+        <li>Bấm chọn dự án ở góc trên → <b>New Project</b> → đặt tên (vd: "youtube-research") → Create.</li>
+        <li>Vào <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank">thư viện API - YouTube Data API v3</a> → bấm <b>Enable</b>.</li>
+        <li>Vào <b>APIs &amp; Services → Credentials</b> → <b>Create Credentials → API key</b>.</li>
+        <li>Sao chép key và dán vào ô trên. Miễn phí 10.000 đơn vị quota/ngày (đủ ~90 lần phân tích/ngày).</li>
+        <li>Lưu ý: nếu đặt giới hạn cho key, chỉ chọn <b>API restrictions → YouTube Data API v3</b>. Nếu đặt "HTTP referrers" thì thêm <b>stickman.kentjuno.com</b> vào danh sách cho phép.</li>
+      </ol>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div style="flex:2">
+        <label>Kênh đối chiếu HOẶC thể loại nội dung</label>
+        <input type="text" id="query" placeholder="VD: https://youtube.com/@MrBeast • @tênkênh • 'nấu ăn gia đình' • 'review công nghệ'">
+        <div class="hint">Nhập link/@handle của một kênh để tìm kênh tương tự, hoặc nhập từ khóa thể loại.</div>
+      </div>
+      <div>
+        <label>Khu vực ưu tiên</label>
+        <select id="region">
+          <option value="VN" selected>Việt Nam</option>
+          <option value="US">Mỹ / Quốc tế</option>
+          <option value="">Không giới hạn</option>
+        </select>
+      </div>
+    </div>
+    <button id="go">🔍 Phân tích</button>
+    <button class="ghost" id="csv" style="display:none">⬇ Tải bảng đối thủ (CSV)</button>
+    <div id="status"></div>
+  </div>
+
+  <div id="results">
+    <div id="seedSection"></div>
+    <h2>Kênh tương tự / đối thủ</h2>
+    <div class="card" style="overflow-x:auto"><table id="compTable"></table></div>
+    <h2>Nhận định nhanh</h2>
+    <div id="insights"></div>
+    <h2>Lộ trình đăng bài 4 tuần đề xuất</h2>
+    <div class="card">
+      <div id="planSummary" style="margin-bottom:12px"></div>
+      <div class="cal" id="calendar"></div>
+    </div>
+    <h2>Gợi ý chủ đề video (dựa trên video nổi bật của đối thủ)</h2>
+    <div class="card" id="ideas"></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+const API = 'https://www.googleapis.com/youtube/v3/';
+const $ = id => document.getElementById(id);
+const DAYS_VI = ['CN','T2','T3','T4','T5','T6','T7'];
+const STOP = new Set(('và của là có cho với các những này khi đã một về được trong tôi bạn mình anh em chỉ không phải như thế nào tại sao gì the a an of to in for and or on at is are was be with you my i how what why when new best top full video official vlog tap tập phần part ep episode').split(' '));
+
+let lastCompetitors = [];
+
+$('apiKey').value = localStorage.getItem('yt_api_key') || '';
+$('apiKey').addEventListener('change', e => localStorage.setItem('yt_api_key', e.target.value.trim()));
+
+function fmt(n){
+  n = Number(n)||0;
+  if(n>=1e9) return (n/1e9).toFixed(1)+' tỷ';
+  if(n>=1e6) return (n/1e6).toFixed(1)+' tr';
+  if(n>=1e3) return (n/1e3).toFixed(1)+' N';
+  return String(n);
+}
+function esc(s){ return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function setStatus(msg, err){ const el=$('status'); el.textContent=msg; el.className = err?'err':''; }
+
+async function yt(endpoint, params){
+  const key = $('apiKey').value.trim();
+  const url = API + endpoint + '?' + new URLSearchParams({...params, key});
+  const r = await fetch(url);
+  const j = await r.json();
+  if(j.error){
+    const reason = (j.error.errors&&j.error.errors[0]&&j.error.errors[0].reason)||'';
+    if(reason==='quotaExceeded') throw new Error('Hết quota API hôm nay. Thử lại sau 0h giờ Thái Bình Dương (~14-15h VN).');
+    if(String(j.error.code)==='400'||reason.includes('keyInvalid')) throw new Error('API key không hợp lệ. Kiểm tra lại key và đảm bảo đã bật YouTube Data API v3.');
+    throw new Error(j.error.message||'Lỗi API');
+  }
+  return j;
+}
+
+// ---- Phân tích input ----
+function parseInput(q){
+  q = q.trim();
+  let m;
+  if(m = q.match(/(?:youtube\.com|youtu\.be)\/channel\/(UC[\w-]{20,})/i)) return {type:'id', value:m[1]};
+  if(m = q.match(/^UC[\w-]{20,}$/)) return {type:'id', value:q};
+  if(m = q.match(/(?:youtube\.com\/)?@([\w.\-]+)/)) return {type:'handle', value:m[1]};
+  if(m = q.match(/youtube\.com\/(?:c|user)\/([\w.\-]+)/i)) return {type:'name', value:decodeURIComponent(m[1])};
+  if(/youtube\.com|youtu\.be/i.test(q)) return {type:'name', value:q.replace(/https?:\/\/\S*?\//g,' ').trim()};
+  return {type:'keyword', value:q};
+}
+
+async function resolveChannel(input){
+  let j;
+  if(input.type==='id') j = await yt('channels',{part:'snippet,statistics,contentDetails', id:input.value});
+  else if(input.type==='handle') j = await yt('channels',{part:'snippet,statistics,contentDetails', forHandle:'@'+input.value});
+  else {
+    const s = await yt('search',{part:'snippet', type:'channel', q:input.value, maxResults:1});
+    if(!s.items.length) return null;
+    j = await yt('channels',{part:'snippet,statistics,contentDetails', id:s.items[0].snippet.channelId});
+  }
+  return j.items && j.items[0] || null;
+}
+
+// ---- Lấy video gần đây của một kênh ----
+async function getRecentVideos(channel, max){
+  try{
+    const pl = channel.contentDetails.relatedPlaylists.uploads;
+    const items = await yt('playlistItems',{part:'contentDetails', playlistId:pl, maxResults:max||25});
+    const ids = items.items.map(i=>i.contentDetails.videoId).join(',');
+    if(!ids) return [];
+    const v = await yt('videos',{part:'snippet,statistics', id:ids});
+    return v.items||[];
+  }catch(e){ return []; }
+}
+
+function analyzeVideos(videos){
+  if(!videos.length) return null;
+  const dates = videos.map(v=>new Date(v.snippet.publishedAt)).sort((a,b)=>a-b);
+  const spanDays = Math.max(1,(dates[dates.length-1]-dates[0])/864e5);
+  const perWeek = (videos.length-1)/spanDays*7;
+  const views = videos.map(v=>Number(v.statistics.viewCount||0));
+  const avgViews = views.reduce((a,b)=>a+b,0)/videos.length;
+  const dayHist = Array(7).fill(0), hourHist = Array(24).fill(0);
+  dates.forEach(d=>{ dayHist[d.getDay()]++; hourHist[d.getHours()]++; });
+  const top = [...videos].sort((a,b)=>(b.statistics.viewCount||0)-(a.statistics.viewCount||0)).slice(0,3);
+  return {perWeek, avgViews, dayHist, hourHist, top, count:videos.length, spanDays};
+}
+
+// ---- Trích từ khóa từ tiêu đề ----
+function extractKeywords(channel, videos){
+  const text = [channel.snippet.title, channel.snippet.description.slice(0,300),
+    ...videos.map(v=>v.snippet.title)].join(' ').toLowerCase();
+  const words = text.normalize('NFC').replace(/[^\p{L}\p{N}\s]/gu,' ').split(/\s+/)
+    .filter(w=>w.length>2 && !STOP.has(w) && !/^\d+$/.test(w));
+  const freq = {};
+  words.forEach(w=>freq[w]=(freq[w]||0)+1);
+  return Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,6).map(e=>e[0]);
+}
+
+// ---- Tìm kênh tương tự ----
+async function findSimilar(query, excludeId, region){
+  const params = {part:'snippet', type:'channel', q:query, maxResults:15};
+  if(region) params.regionCode = region;
+  const s = await yt('search', params);
+  const ids = [...new Set(s.items.map(i=>i.snippet.channelId))].filter(id=>id!==excludeId).slice(0,12);
+  if(!ids.length) return [];
+  const c = await yt('channels',{part:'snippet,statistics,contentDetails', id:ids.join(',')});
+  const order = {}; ids.forEach((id,i)=>order[id]=i);
+  return (c.items||[]).filter(ch=>Number(ch.statistics.subscriberCount||0)>=100)
+    .sort((a,b)=>order[a.id]-order[b.id]);
+}
+
+// ---- Render ----
+function renderSeed(ch, an, keywords){
+  const s = ch.statistics;
+  $('seedSection').innerHTML = `
+    <h2>Kênh đối chiếu: <a href="https://youtube.com/channel/${ch.id}" target="_blank">${esc(ch.snippet.title)}</a></h2>
+    <div class="card">
+      <div class="grid">
+        <div class="stat"><div class="v">${fmt(s.subscriberCount)}</div><div class="l">Người đăng ký</div></div>
+        <div class="stat"><div class="v">${fmt(s.viewCount)}</div><div class="l">Tổng lượt xem</div></div>
+        <div class="stat"><div class="v">${fmt(s.videoCount)}</div><div class="l">Số video</div></div>
+        <div class="stat"><div class="v">${an?an.perWeek.toFixed(1):'—'}</div><div class="l">Video/tuần (gần đây)</div></div>
+        <div class="stat"><div class="v">${an?fmt(an.avgViews):'—'}</div><div class="l">View TB/video gần đây</div></div>
+      </div>
+      <div style="margin-top:10px">Từ khóa chủ đạo: ${keywords.map(k=>`<span class="badge">${esc(k)}</span>`).join('')}</div>
+    </div>`;
+}
+
+function renderCompetitors(comps){
+  const rows = comps.map((c,i)=>{
+    const a = c.analysis;
+    const topVids = a && a.top.length ? a.top.map(v=>
+      `<div class="topvid">▸ <a href="https://youtu.be/${v.id}" target="_blank">${esc(v.snippet.title.slice(0,60))}</a> (${fmt(v.statistics.viewCount)} view)</div>`).join('') : '';
+    return `<tr>
+      <td>${i+1}</td>
+      <td><a href="https://youtube.com/channel/${c.id}" target="_blank"><b>${esc(c.snippet.title)}</b></a>
+        ${topVids?'<div style="margin-top:4px">'+topVids+'</div>':''}</td>
+      <td class="num">${fmt(c.statistics.subscriberCount)}</td>
+      <td class="num">${fmt(c.statistics.videoCount)}</td>
+      <td class="num">${a?a.perWeek.toFixed(1):'—'}</td>
+      <td class="num">${a?fmt(a.avgViews):'—'}</td>
+      <td>${a?bestDays(a.dayHist).map(d=>DAYS_VI[d]).join(', '):'—'}</td>
+    </tr>`;
+  }).join('');
+  $('compTable').innerHTML = `<thead><tr>
+    <th>#</th><th>Kênh & video nổi bật gần đây</th><th>Sub</th><th>Video</th>
+    <th>Video/tuần</th><th>View TB</th><th>Ngày hay đăng</th>
+  </tr></thead><tbody>${rows}</tbody>`;
+}
+
+function bestDays(hist){
+  return hist.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]).slice(0,3).filter(x=>x[0]>0).map(x=>x[1]);
+}
+function median(arr){
+  if(!arr.length) return 0;
+  const s=[...arr].sort((a,b)=>a-b); const m=Math.floor(s.length/2);
+  return s.length%2 ? s[m] : (s[m-1]+s[m])/2;
+}
+
+function renderInsights(comps, seedAn){
+  const analyzed = comps.filter(c=>c.analysis);
+  const freqs = analyzed.map(c=>c.analysis.perWeek);
+  const medFreq = median(freqs);
+  const dayTotal = Array(7).fill(0), hourTotal = Array(24).fill(0);
+  analyzed.forEach(c=>{ c.analysis.dayHist.forEach((v,i)=>dayTotal[i]+=v); c.analysis.hourHist.forEach((v,i)=>hourTotal[i]+=v); });
+  const topDs = bestDays(dayTotal);
+  const topHour = hourTotal.indexOf(Math.max(...hourTotal));
+  const smallest = analyzed.filter(c=>Number(c.statistics.subscriberCount)<100000);
+  const highRatio = analyzed.filter(c=>c.analysis.avgViews > Number(c.statistics.subscriberCount)*0.5);
+
+  const items = [];
+  items.push(`Đối thủ trong ngách này đăng trung bình <b>${medFreq.toFixed(1)} video/tuần</b>. Đây là nhịp bạn nên hướng tới để cạnh tranh.`);
+  items.push(`Ngày đăng phổ biến nhất của đối thủ: <b>${topDs.map(d=>DAYS_VI[d]).join(', ')}</b>, khung giờ hay đăng nhất: <b>khoảng ${topHour}h</b>.`);
+  if(highRatio.length) items.push(`Kênh có tỷ lệ view/sub cao (nội dung dễ viral, đáng học theo format): <b>${highRatio.slice(0,3).map(c=>esc(c.snippet.title)).join(', ')}</b>.`);
+  if(smallest.length) items.push(`Đối thủ trực tiếp cùng tầm (dưới 100N sub) — nên theo dõi sát: <b>${smallest.slice(0,3).map(c=>esc(c.snippet.title)).join(', ')}</b>.`);
+  if(seedAn && medFreq > seedAn.perWeek + 0.5) items.push(`<span class="warn">⚠ </span> Kênh đối chiếu đăng ${seedAn.perWeek.toFixed(1)} video/tuần, thấp hơn mặt bằng đối thủ (${medFreq.toFixed(1)}). Tăng tần suất là cơ hội vượt lên.`);
+
+  $('insights').innerHTML = items.map(t=>`<div class="insight">${t}</div>`).join('');
+  return {medFreq: Math.min(7, Math.max(1, Math.round(medFreq)||2)), topDs, topHour};
+}
+
+function renderPlan(plan, ideas){
+  const {medFreq, topDs, topHour} = plan;
+  const postDays = topDs.slice(0, Math.min(medFreq,3));
+  while(postDays.length < Math.min(medFreq,7)){
+    for(let d=0; d<7 && postDays.length<Math.min(medFreq,7); d++) if(!postDays.includes(d)) postDays.push(d);
+  }
+  $('planSummary').innerHTML =
+    `Đề xuất: <b>${medFreq} video/tuần</b>, đăng vào <b>${postDays.map(d=>DAYS_VI[d]).join(', ')}</b> khoảng <b>${plan.topHour}h</b>. Tuần 1-2 bám format đối thủ đã chứng minh hiệu quả, tuần 3-4 thử biến tấu riêng để tạo khác biệt.`;
+
+  const start = new Date(); start.setDate(start.getDate() + (1 - start.getDay() + 7) % 7 || 7); // thứ 2 tới
+  let html = DAYS_VI.slice(1).concat(DAYS_VI[0]).map(d=>`<div class="dh">${d}</div>`).join('');
+  let ideaIdx = 0;
+  for(let i=0;i<28;i++){
+    const d = new Date(start); d.setDate(start.getDate()+i);
+    const isPost = postDays.includes(d.getDay());
+    let idea = '';
+    if(isPost){ idea = ideas[ideaIdx % ideas.length] || 'Video theo chủ đề ngách'; ideaIdx++; }
+    html += `<div class="day${isPost?' post':''}"><div class="n">${d.getDate()}/${d.getMonth()+1}</div>${isPost?`<div class="idea">🎬 ${esc(idea.slice(0,48))}</div>`:''}</div>`;
+  }
+  $('calendar').innerHTML = html;
+}
+
+function buildIdeas(comps){
+  const ideas = [];
+  comps.forEach(c=>{
+    if(c.analysis) c.analysis.top.forEach(v=>{
+      ideas.push({title:v.snippet.title, views:Number(v.statistics.viewCount||0), from:c.snippet.title});
+    });
+  });
+  ideas.sort((a,b)=>b.views-a.views);
+  const uniq = []; const seen = new Set();
+  for(const i of ideas){
+    const k = i.title.toLowerCase().slice(0,25);
+    if(!seen.has(k)){ seen.add(k); uniq.push(i); }
+    if(uniq.length>=12) break;
+  }
+  $('ideas').innerHTML = uniq.map(i=>
+    `<div class="insight">💡 Làm phiên bản của bạn cho: <b>${esc(i.title)}</b><br>
+     <span class="topvid">→ format đã đạt ${fmt(i.views)} view trên kênh ${esc(i.from)}</span></div>`).join('')
+    || '<div class="insight warn">Chưa đủ dữ liệu video để gợi ý chủ đề.</div>';
+  return uniq.map(i=>i.title);
+}
+
+function exportCSV(){
+  const head = 'Tên kênh,Link,Sub,Tổng video,Video/tuần,View TB gần đây,Ngày hay đăng\n';
+  const rows = lastCompetitors.map(c=>{
+    const a=c.analysis;
+    return [`"${c.snippet.title.replace(/"/g,'""')}"`, `https://youtube.com/channel/${c.id}`,
+      c.statistics.subscriberCount, c.statistics.videoCount,
+      a?a.perWeek.toFixed(1):'', a?Math.round(a.avgViews):'',
+      a?'"'+bestDays(a.dayHist).map(d=>DAYS_VI[d]).join(' ')+'"':''].join(',');
+  }).join('\n');
+  const blob = new Blob(['﻿'+head+rows], {type:'text/csv;charset=utf-8'});
+  const aEl = document.createElement('a');
+  aEl.href = URL.createObjectURL(blob); aEl.download = 'doi-thu-youtube.csv'; aEl.click();
+}
+$('csv').addEventListener('click', exportCSV);
+
+// ---- Luồng chính ----
+$('go').addEventListener('click', run);
+$('query').addEventListener('keydown', e=>{ if(e.key==='Enter') run(); });
+
+async function run(){
+  const q = $('query').value.trim();
+  if(!$('apiKey').value.trim()) return setStatus('Vui lòng nhập API key trước.', true);
+  if(!q) return setStatus('Vui lòng nhập link kênh hoặc từ khóa thể loại.', true);
+  $('go').disabled = true;
+  $('results').style.display='none'; $('csv').style.display='none';
+  $('seedSection').innerHTML='';
+  const region = $('region').value;
+
+  try{
+    const input = parseInput(q);
+    let searchQuery = q, excludeId = null, seedAn = null;
+
+    if(input.type !== 'keyword'){
+      setStatus('Đang tìm kênh đối chiếu...');
+      const seed = await resolveChannel(input);
+      if(!seed) throw new Error('Không tìm thấy kênh. Kiểm tra lại link/@handle.');
+      excludeId = seed.id;
+      setStatus('Đang phân tích video của kênh đối chiếu...');
+      const vids = await getRecentVideos(seed, 25);
+      seedAn = analyzeVideos(vids);
+      const keywords = extractKeywords(seed, vids);
+      searchQuery = keywords.slice(0,4).join(' ') || seed.snippet.title;
+      renderSeed(seed, seedAn, keywords);
+    }
+
+    setStatus('Đang tìm kênh tương tự...');
+    const comps = await findSimilar(searchQuery, excludeId, region);
+    if(!comps.length) throw new Error('Không tìm thấy kênh tương tự. Thử từ khóa khác hoặc đổi khu vực.');
+
+    setStatus('Đang phân tích lịch đăng của từng đối thủ (' + Math.min(comps.length,7) + ' kênh)...');
+    for(let i=0; i<Math.min(comps.length,7); i++){
+      const vids = await getRecentVideos(comps[i], 20);
+      comps[i].analysis = analyzeVideos(vids);
+    }
+
+    lastCompetitors = comps;
+    renderCompetitors(comps);
+    const plan = renderInsights(comps, seedAn);
+    const ideaTitles = buildIdeas(comps);
+    renderPlan(plan, ideaTitles);
+
+    $('results').style.display='block'; $('csv').style.display='inline-block';
+    setStatus('✅ Hoàn tất. Phân tích ' + comps.length + ' kênh tương tự.');
+  }catch(e){
+    setStatus('Lỗi: ' + e.message, true);
+  }finally{
+    $('go').disabled = false;
+  }
+}
+</script>
+</body>
+</html>
