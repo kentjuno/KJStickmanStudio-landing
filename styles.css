@@ -68,10 +68,10 @@
   --glow-amber: 0 0 30px rgba(245, 158, 11, 0.15);
   
   /* Fonts */
-  --sans: "Inter", "Segoe UI", sans-serif;
-  --display: "Sora", "Segoe UI", sans-serif;
+  --sans: "Be Vietnam Pro", "Segoe UI", sans-serif;
+  --display: "Be Vietnam Pro", "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", monospace;
-  --hand: "Caveat", "Patrick Hand", cursive;
+  --hand: "Patrick Hand", cursive;
 }
 
 /* Hand-drawn accents (doodle motif) */
@@ -773,7 +773,7 @@ h2.center::after { left: 10%; right: 10%; }
   gap: 20px;
 }
 
-/* Install / usage guide — vertical numbered steps */
+/* Install / usage guide: vertical numbered steps */
 .guide-block { margin-top: 8px; }
 .guide-block + .guide-block { margin-top: 40px; }
 .guide-block > h3 { font-family: var(--display); font-size: 20px; color: var(--amber-2); margin: 0 0 18px; }
@@ -1472,7 +1472,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
   .buy-bar .btn { padding: 9px 16px; font-size: 12px; }
 }
 
-/* ── Responsive YouTube embeds (hero demo + install guide) ── */
+/* Responsive YouTube embeds (hero demo + install guide) */
 .video-embed {
   position: relative;
   width: 100%;
