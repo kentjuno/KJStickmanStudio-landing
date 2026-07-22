@@ -1521,3 +1521,8 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
 .style-tile::after{z-index:1;}
 .style-tile .st-name{z-index:2;}
 .style-tile .st-emoji{z-index:2;}
+
+/* Tile fallback bg (graceful if an image is slow/unavailable) + tidy name bar */
+.style-tile{background:#16181d;}
+.style-tile .st-name{width:100%;box-sizing:border-box;padding-right:6px;}
+.style-tile img{background:#16181d;}
