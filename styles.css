@@ -1494,3 +1494,24 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
 /* Catalog chips (modes/genres/styles section) */
 .chip-tag{display:inline-block;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);font-size:13px;line-height:1.25;white-space:nowrap;transition:border-color .2s,background .2s;}
 .chip-tag:hover{border-color:var(--amber-2);background:rgba(255,255,255,.08);}
+
+/* Art-style preview tiles (catalog section). Decorative gradient + emoji hint;
+   drop a real render at styles/<id>.png later and swap the tile for an <img>. */
+.style-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+.style-tile{position:relative;aspect-ratio:16/10;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+  overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;
+  transition:transform .2s,border-color .2s;}
+.style-tile:hover{transform:translateY(-3px);border-color:var(--amber-2);}
+.style-tile .st-emoji{position:absolute;top:8px;left:10px;font-size:26px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5));}
+.style-tile .st-name{font-size:12.5px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);line-height:1.2;position:relative;z-index:1;}
+.style-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%);}
+/* gradient palette cycle */
+.st-g1{background:linear-gradient(135deg,#f9a825,#f57f17);}
+.st-g2{background:linear-gradient(135deg,#26c6da,#00838f);}
+.st-g3{background:linear-gradient(135deg,#7e57c2,#4527a0);}
+.st-g4{background:linear-gradient(135deg,#ef5350,#b71c1c);}
+.st-g5{background:linear-gradient(135deg,#66bb6a,#2e7d32);}
+.st-g6{background:linear-gradient(135deg,#ec407a,#ad1457);}
+.st-g7{background:linear-gradient(135deg,#42a5f5,#1565c0);}
+.st-g8{background:linear-gradient(135deg,#8d6e63,#4e342e);}
+.st-mono{background:linear-gradient(135deg,#455a64,#0f1114);}
