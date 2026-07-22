@@ -1515,3 +1515,9 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
 .st-g7{background:linear-gradient(135deg,#42a5f5,#1565c0);}
 .st-g8{background:linear-gradient(135deg,#8d6e63,#4e342e);}
 .st-mono{background:linear-gradient(135deg,#455a64,#0f1114);}
+
+/* Real style-sample images inside the tiles (generated via Flow) */
+.style-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.style-tile::after{z-index:1;}
+.style-tile .st-name{z-index:2;}
+.style-tile .st-emoji{z-index:2;}
