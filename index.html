@@ -765,6 +765,27 @@
     </div>
   </div>
 
+  <!-- Style image lightbox -->
+  <div id="lightbox" class="lightbox" hidden aria-hidden="true">
+    <button class="lb-close" aria-label="Đóng">&times;</button>
+    <figure><img src="" alt=""><figcaption class="lb-cap"></figcaption></figure>
+  </div>
+  <script>
+  (function(){
+    var lb=document.getElementById('lightbox'),img=lb.querySelector('img'),cap=lb.querySelector('.lb-cap');
+    document.querySelectorAll('.style-tile').forEach(function(t){
+      t.addEventListener('click',function(){
+        var i=t.querySelector('img'); if(!i)return;
+        img.src=i.src; img.alt=i.alt;
+        var n=t.querySelector('.st-name'); cap.textContent=n?n.textContent:i.alt;
+        lb.hidden=false; lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+      });
+    });
+    function close(){lb.hidden=true; lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; img.src='';}
+    lb.addEventListener('click',close);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close();});
+  })();
+  </script>
   <script src="main.js?v=2.0.0"></script>
 </body>
 </html>
