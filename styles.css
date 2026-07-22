@@ -1490,3 +1490,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
   height: 100%;
   border: 0;
 }
+
+/* Catalog chips (modes/genres/styles section) */
+.chip-tag{display:inline-block;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);font-size:13px;line-height:1.25;white-space:nowrap;transition:border-color .2s,background .2s;}
+.chip-tag:hover{border-color:var(--amber-2);background:rgba(255,255,255,.08);}
